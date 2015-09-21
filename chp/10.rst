@@ -192,7 +192,7 @@ netpbm 的灰度文件格式名为 PGM（"portable grey map"）。事实上它�
     skipSpace (a, s) = Just (a, L8.dropWhile isSpace s)
 
 理解这个函数的关键在于理解其中的链。每个 ``(>>?)`` 的左侧都是一个 ``Maybe`` 值，右侧都是一个返回 ``Maybe`` 值的函数。
-这样，``Maybe`` 值就可以不断传给后续 ``(>>?)`` 表达式。
+这样，``Maybe`` 值就可以不断传给后续 ``(>>?)`` 表达式。[译注：这里作者的描述其实具有一定的误导性。其实每个 ``>>?`` 的右边一直到函数定义末尾的所有代码，才是该  ``>>?`` 的第二个参数。此函数中的所有lambda表达式其实都是嵌套在上一个lambda表达式之内的，否则最后 ``Just (Greymap width height maxGrey bitmap, s)`` 是怎么拿到的 width, height 等信息的呢？]
 
 我们新增了 ``skipSpace`` 函数用来提高可读性。通过这些改进，我们已将代码长度减半。通过移除样板 ``case`` 代码，代码变得更容易理解。
 
